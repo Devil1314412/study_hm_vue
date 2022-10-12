@@ -1,0 +1,17 @@
+@import url(/node_modules/bootstrap/dist/css/bootstrap.min.css);
+
+. {
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+.header .welcome_text {
+    text-align: center;
+}
+
+.header .welcome_text span {
+    font-family: "Microsoft YaHei UI", serif ;
+    font-size: xx-large;
+    color: red;
+}

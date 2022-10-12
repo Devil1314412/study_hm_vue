@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@File: index.html
+@Author:Devil
+@HomePage:https://github.com/Devil1314412
+@CreatTime: 2022/10/10 21:44
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <!--    <script src="/static/js/vue.js"></script>-->
+    <!--    导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="/static/css/public_index.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="header">
+    <div class="welcome_text">
+        <span>欢迎学习Vue</span>
+    </div>
+</div>
+<div class="body">
+    <h1 class="title">Hello {{ name }}</h1>
+    <div>
+        <button class="btn btn-primary">Hello</button>
+    </div>
+    <div id="init_vue">
+        <hr>
+        <span>{{ msg }}</span>
+        <br>
+        <a v-bind:href="bind_url_link">{{ bind_comment }}</a>
+        <br>
+        <span v-bind:title="bind_show_time">获取当前时间</span>
+    </div>
+    <div id="if_else_vue">
+        <hr>
+        <span>{{msg}}</span><br>
+        <a href="#" v-if="is_login">欢迎你</a><br v-if="is_login">
+        <span v-if="level === 1">青铜:{{level}}</span>
+        <span v-else-if="level === 2">星耀: {{level}}</span>
+        <span v-else>王者: {{level}}</span>
+    </div>
+    <div id="for_vue">
+        <hr>
+        <span v-for="dict_data in dict">婷儿-->{{dict_data}}<br></span><br>
+        <span v-for="list_data in list">{{list_data}}-->{{list_data + 1}}<br></span><br>
+        <span v-for="(dict_data,dict_index) in dict">{{dict_index}}-->{{dict_data}}<br></span>
+    </div>
+    <div id="methods_vue">
+        <hr>
+        <span>{{msg}}</span><br>
+        <button v-on:click="login">登录</button>
+        <a href="https://baidu.com" @click="register">注册</a><br>
+        <span>Stat: {{init_count}}</span>
+        <button @click="add_count()">点击+1</button>
+        <button @click="minus_count()">点击-1</button>
+    </div>
+</div>
+<div class="footer">
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el: ".body h1",
+        data: {
+            name: "Vue",
+        },
+    })
+    const init_vue = new Vue({
+        el: '#init_vue',
+        data: {
+            msg: 'Vue',
+            bind_url_link: 'https://baidu.com',
+            bind_comment: '跳转百度',
+            bind_show_time: '当前的时间' + new Date().toLocaleString(),
+
+        }
+    })
+    const if_else = new Vue({
+        el: '#if_else_vue',
+        data: {
+            msg: 'Hello Vue',
+            // is_login: true,
+            is_login: false,
+            level: 45,
+        }
+    })
+    const for_vue = new Vue({
+        el: '#for_vue',
+        data: {
+            dict: {
+                '1': '猪',
+                '2': '胖猪',
+                '3': '大胖猪',
+            },
+            list: [1,2,3,],
+        }
+    })
+    const methods_vue = new Vue({
+        // 找元素
+        el: '#methods_vue',
+        // 绑定数据
+        data: {
+            msg: 'Hello',
+            init_count: 0
+        },
+        // 调用方法
+        methods: {
+            login: function (){
+                alert('登录成功');
+            },
+            register: function (){
+                alert('注册成功, 点击跳转...')
+            },
+            add_count: function (init_count){
+                init_count ++
+            },
+            minus_count: function (init_count){
+                init_count --
+            }
+        }
+    })
+</script>
+</body>
+</html>
