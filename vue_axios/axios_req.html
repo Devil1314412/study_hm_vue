@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+@File: axios_req.html
+@Author:Devil
+@HomePage:https://github.com/Devil1314412
+@CreatTime: 2022/10/13 11:42
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial Message</title>
+    <!--    导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!--    导入axios-->
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<div class="body">
+    <div class="home_page" id="home_page">
+        <span>{{name}}</span>
+        <span>{{age}}</span>
+        <button v-on:click="init_msg">点击获取</button>
+    </div>
+</div>
+<div class="footer"></div>
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const init_windows = new Vue({
+        el: '#home_page',
+        data: {
+            name: '',
+            age: ''
+        },
+        methods: {
+            init_msg: () => {
+                axios.get('http://127.0.0.1:8000/public/').then(
+                    response => {
+                        init_windows.name = response.data.username;
+                        init_windows.age = response.data.howold;
+                    }
+                ).catch(
+                    response => {
+                        window.alert(response.error)
+                    }
+                )
+            }
+        },
+        // mounted: function () {
+        //     vue_axios.get('http://127.0.0.1:8000/public/').then(
+        //         response => {
+        //             this.name = response.data.username;
+        //             this.age = response.data.howold;
+        //         }
+        //     ).catch(
+        //         response => {
+        //             window.alert(response.error)
+        //         }
+        //     )
+        // }
+    })
+</script>
+</html>

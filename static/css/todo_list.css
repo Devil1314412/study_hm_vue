@@ -1,0 +1,41 @@
+@import url(/node_modules/bootstrap/dist/css/bootstrap.min.css);
+
+. {
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+
+.header {
+    margin: 10px;
+}
+
+.header .title {
+    text-align: center;
+}
+
+.header .title span {
+    color: red;
+    font-size: xx-large;
+}
+
+.body .todo_task .options {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.body .todo_task .options input {
+    height: 32px;
+    width: 50%;
+    font-size: 20px;
+}
+
+.body .todo_task .todo_msg {
+    margin-bottom: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.body .todo_task .todo_msg button {
+    float: right;
+}
