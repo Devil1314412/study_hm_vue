@@ -11,12 +11,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+    <title>Vue</title>
     <!--    <script src="/static/js/vue.js"></script>-->
     <!--    导入vue.js-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <link rel="stylesheet" href="/static/css/public_index.css">
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/public_index.css" type="text/css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css">
 </head>
 <body>
 <div class="header">
@@ -29,36 +29,70 @@
     <div>
         <button class="btn btn-primary">Hello</button>
     </div>
+    <hr>
     <div id="init_vue">
-        <hr>
         <span>{{ msg }}</span>
         <br>
         <a v-bind:href="bind_url_link">{{ bind_comment }}</a>
         <br>
         <span v-bind:title="bind_show_time">获取当前时间</span>
     </div>
+    <hr>
     <div id="if_else_vue">
-        <hr>
         <span>{{msg}}</span><br>
         <a href="#" v-if="is_login">欢迎你</a><br v-if="is_login">
         <span v-if="level === 1">青铜:{{level}}</span>
         <span v-else-if="level === 2">星耀: {{level}}</span>
         <span v-else>王者: {{level}}</span>
     </div>
+    <hr>
     <div id="for_vue">
-        <hr>
         <span v-for="dict_data in dict">婷儿-->{{dict_data}}<br></span><br>
         <span v-for="list_data in list">{{list_data}}-->{{list_data + 1}}<br></span><br>
         <span v-for="(dict_data,dict_index) in dict">{{dict_index}}-->{{dict_data}}<br></span>
     </div>
+    <hr>
     <div id="methods_vue">
-        <hr>
         <span>{{msg}}</span><br>
         <button v-on:click="login">登录</button>
         <a href="https://baidu.com" @click="register">注册</a><br>
         <span>Stat: {{init_count}}</span>
-        <button @click="add_count()">点击+1</button>
-        <button @click="minus_count()">点击-1</button>
+        <button @click="add_count">点击+1</button>
+        <button @click="minus_count">点击-1</button>
+    </div>
+    <hr>
+    <div id="module_vue">
+        <table>
+            <tr>
+                <td>用户名:</td>
+                <td><input type="text" name="username" v-model:value="username"></td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td><input type="password" name="password" v-model:value="password"></td>
+            </tr>
+            <tr>
+                <td>重复密码:</td>
+                <td><input type="password" name="repeat_password" v-model:value="repeat_password"></td>
+            </tr>
+            <tr>
+                <td>性别:</td>
+                <td>
+                    <span>男</span><input type="radio" name="sex" value="male" v-model:value="sex">
+                    <span>女</span><input type="radio" name="sex" value="female" v-model:value="sex">
+                </td>
+            </tr>
+            <tr>
+                <td>爱好:</td>
+                <td>
+                    <span>抽烟</span><input type="checkbox" name="hobby" value="smoke" v-model:value="hobby">
+                    <span>喝酒</span><input type="checkbox" name="hobby" value="beer" v-model:value="hobby">
+                    <span>烫头</span><input type="checkbox" name="hobby" value="perm" v-model:value="hobby ">
+                </td>
+            </tr>
+        </table>
+        <button class="btn btn-danger" v-on:click="submit_reg">提交注册</button>
+        <span>{{msg}}</span>
     </div>
 </div>
 <div class="footer">
@@ -72,6 +106,7 @@
             name: "Vue",
         },
     })
+
     const init_vue = new Vue({
         el: '#init_vue',
         data: {
@@ -82,6 +117,7 @@
 
         }
     })
+
     const if_else = new Vue({
         el: '#if_else_vue',
         data: {
@@ -91,6 +127,7 @@
             level: 45,
         }
     })
+
     const for_vue = new Vue({
         el: '#for_vue',
         data: {
@@ -99,9 +136,10 @@
                 '2': '胖猪',
                 '3': '大胖猪',
             },
-            list: [1,2,3,],
+            list: [1, 2, 3,],
         }
     })
+
     const methods_vue = new Vue({
         // 找元素
         el: '#methods_vue',
@@ -112,17 +150,51 @@
         },
         // 调用方法
         methods: {
-            login: function (){
+            login: function () {
                 alert('登录成功');
             },
-            register: function (){
+            register: function () {
                 alert('注册成功, 点击跳转...')
             },
-            add_count: function (init_count){
-                init_count ++
+            add_count: function () {
+                methods_vue.init_count++
             },
-            minus_count: function (init_count){
-                init_count --
+            minus_count: function () {
+                methods_vue.init_count--
+            }
+        }
+    })
+
+    const module_vue = new Vue({
+        el: '#module_vue',
+        data: {
+            username: '',
+            password: '',
+            repeat_password: '',
+            sex: '',
+            hobby: [],
+            msg: '',
+        },
+        methods: {
+            submit_reg: function () {
+                if (module_vue.password === module_vue.repeat_password) {
+                    window.alert('用户' + module_vue.username + '注册成功');
+                    window.console.log(module_vue.hobby)
+                } else {
+                    module_vue.msg = '两次输入的密码不同, 请重新输入';
+                }
+            }
+        }
+    })
+
+    const eq = new Vue({
+        el:'',
+        data: {
+
+        },
+        methods: {
+            addn: ()=>{
+                window.console.log('addn')
             }
         }
     })

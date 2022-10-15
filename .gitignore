@@ -2,7 +2,6 @@
 *.iml
 out
 gen
-node_moudules/
 
 # Project exclude paths
-/node_modules/
+node_modules/
